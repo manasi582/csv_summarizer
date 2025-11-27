@@ -74,3 +74,16 @@ Feel free to submit a PR or open an issue for suggestions or bugs.
 ## License
 
 This project is licensed under the MIT License.
+
+## Screenshots
+
+### Homepage
+![Homepage](homepage.png)
+
+### CSV Summary Analysis
+![CSV Summary 1](csv_summary1.png)
+
+![CSV Summary 2](csv_summary2.png)
+
+### Text File Generation
+![Text File Generation](textfile_generation.png)
