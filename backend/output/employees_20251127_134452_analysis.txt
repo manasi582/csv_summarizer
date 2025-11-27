@@ -1,0 +1,252 @@
+CSV ANALYSIS REPORT
+================================================================================
+
+FILE INFORMATION
+--------------------------------------------------------------------------------
+Filename: employees.csv
+Generated: 2025-11-27 13:44:52
+Analyst: CSV Analyzer v1.0
+
+================================================================================
+EXECUTIVE SUMMARY
+================================================================================
+
+Dataset Analysis Summary
+
+The dataset 'employees.csv' contains 1,262 rows and 14 columns.
+
+Data Composition:
+- 1 numeric columns
+- 13 categorical columns
+- 0.87 MB memory usage
+
+Data Quality:
+- Overall completeness: 89.8%
+- Missing data: 10.17%
+- Columns with >10% missing: 1
+
+No significant correlations detected.
+
+This dataset appears to be requires data cleaning due to missing values.
+
+================================================================================
+DATASET METRICS
+================================================================================
+
+Dimensions: 1,262 rows × 14 columns
+Memory Usage: 0.87 MB
+Data Completeness: 89.83%
+Missing Values: 10.17%
+
+================================================================================
+COLUMN-LEVEL ANALYSIS
+================================================================================
+
+[1] Employee ID
+----------------------------------------
+Type: CATEGORICAL
+Missing: 1.51% (19 values)
+Unique Values: 985
+Cardinality: 78.05%
+
+Sample Values:
+  • E02002
+  • E02003
+  • E02004
+  • E02005
+  • E02006
+
+[2] Full Name
+----------------------------------------
+Type: CATEGORICAL
+Missing: 3.17% (40 values)
+Unique Values: 966
+Cardinality: 76.55%
+
+Sample Values:
+  • Kai Le
+  • Robert Patel
+  • Cameron Lo
+  • Harper Castillo
+  • Harper Dominguez
+
+[3] Job Title
+----------------------------------------
+Type: CATEGORICAL
+Missing: 4.6% (58 values)
+Unique Values: 33
+Cardinality: 2.61%
+
+Sample Values:
+  • Controls Engineer
+  • Analyst
+  • Network Administrator
+  • IT Systems Architect
+  • Director
+
+[4] Department
+----------------------------------------
+Type: CATEGORICAL
+Missing: 3.72% (47 values)
+Unique Values: 7
+Cardinality: 0.55%
+
+Sample Values:
+  • Engineering
+  • Sales
+  • IT
+  • Accounting
+  • Finance
+
+[5] Business Unit
+----------------------------------------
+Type: CATEGORICAL
+Missing: 6.5% (82 values)
+Unique Values: 4
+Cardinality: 0.32%
+
+Sample Values:
+  • Manufacturing
+  • Corporate
+  • Research & Development
+  • Specialty Products
+
+[6] Gender
+----------------------------------------
+Type: CATEGORICAL
+Missing: 3.88% (49 values)
+Unique Values: 2
+Cardinality: 0.16%
+
+Sample Values:
+  • Male
+  • Female
+
+[7] Ethnicity
+----------------------------------------
+Type: CATEGORICAL
+Missing: 3.33% (42 values)
+Unique Values: 4
+Cardinality: 0.32%
+
+Sample Values:
+  • Asian
+  • Latino
+  • Caucasian
+  • Black
+
+[8] Age
+----------------------------------------
+Type: NUMERIC
+Missing: 0.48% (6 values)
+Unique Values: 41
+Cardinality: 3.25%
+
+Statistical Summary:
+  • Mean: 44.93
+  • Median: 45.0
+  • Std Dev: 11.17
+  • Range: [25.0, 65.0]
+  • Coefficient of Variation: 24.86%
+
+[9] Hire Date
+----------------------------------------
+Type: CATEGORICAL
+Missing: 2.77% (35 values)
+Unique Values: 910
+Cardinality: 72.11%
+
+Sample Values:
+  • 2/5/2022
+  • 10/23/2013
+  • 3/24/2019
+  • 4/7/2018
+  • 6/18/2005
+
+[10] Annual Salary
+----------------------------------------
+Type: CATEGORICAL
+Missing: 5.78% (73 values)
+Unique Values: 963
+Cardinality: 76.31%
+
+Sample Values:
+  • $92,368 
+  • $45,703 
+  • $83,576 
+  • $98,062 
+  • $175,391 
+
+[11] Bonus %
+----------------------------------------
+Type: CATEGORICAL
+Missing: 3.8% (48 values)
+Unique Values: 37
+Cardinality: 2.93%
+
+Sample Values:
+  • 0%
+  • 24%
+  • 10%
+  • 23%
+  • 8%
+
+[12] Country
+----------------------------------------
+Type: CATEGORICAL
+Missing: 8.4% (106 values)
+Unique Values: 3
+Cardinality: 0.24%
+
+Sample Values:
+  • United States
+  • China
+  • Brazil
+
+[13] City
+----------------------------------------
+Type: CATEGORICAL
+Missing: 4.36% (55 values)
+Unique Values: 13
+Cardinality: 1.03%
+
+Sample Values:
+  • Columbus
+  • Chicago
+  • Shanghai
+  • Seattle
+  • Austin
+
+[14] Exit Date
+----------------------------------------
+Type: CATEGORICAL
+Missing: 90.1% (1137 values)
+Unique Values: 101
+Cardinality: 8.0%
+
+Sample Values:
+  • 2/14/2014
+  • 3/31/2019
+  • 7/27/2018
+  • 11/2/2016
+  • 11/27/2003
+
+================================================================================
+DATA QUALITY ASSESSMENT
+================================================================================
+
+Completeness Score: 89.8%
+Complete Columns: 0/14
+Columns with >10% Missing: 1
+High Cardinality Columns: 0
+
+================================================================================
+VISUALIZATIONS
+================================================================================
+
+Generated plots:
+  • Missing Values: output/missing_values.png
+  • Distributions: output/distributions.png
+
+================================================================================
+End of Report
