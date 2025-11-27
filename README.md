@@ -68,6 +68,9 @@ A powerful full-stack application for analyzing and summarizing CSV datasets. Th
    - Wait for the analysis to complete.
    - Explore the dashboard and insights.
 
+## Contributing
+Feel free to submit a PR or open an issue for suggestions or bugs.
+
 ## License
 
 This project is licensed under the MIT License.
