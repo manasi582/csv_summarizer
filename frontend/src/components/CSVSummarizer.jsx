@@ -277,7 +277,7 @@ End of Report
                             </div>
                             <div>
                                 <h1 className="text-base sm:text-lg font-semibold text-slate-100">CSV Analyzer</h1>
-                                <p className="text-xs text-slate-400 hidden sm:block">Professional Data Profiling Suite</p>
+                                <p className="text-xs text-slate-400 hidden sm:block">Analyze. Visualize. Optimize</p>
                             </div>
                         </div>
                         {analysis && (
