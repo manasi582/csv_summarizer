@@ -6,7 +6,7 @@ A powerful full-stack application for analyzing and summarizing CSV datasets. Th
 
 - **Automated Analysis**: Instantly calculates statistics (mean, median, std dev, etc.) for numeric columns.
 - **Data Visualization**: Interactive charts for missing values, type distribution, and correlations.
-- **AI Summaries**: Generates concise, natural language summaries of your dataset using LLMs (Claude).
+- **AI Summaries**: Generates concise, natural language summaries of your dataset using LLMs (Google Gemini).
 - **Data Quality Assessment**: Evaluates completeness and identifies potential data quality issues.
 - **Export Reports**: Download detailed analysis reports.
 
@@ -21,8 +21,10 @@ A powerful full-stack application for analyzing and summarizing CSV datasets. Th
 - **PapaParse**: Powerful CSV parser.
 
 ### Backend
-- **Python**: Core logic for data processing (if applicable).
+- **Python**: Core logic for data processing.
+- **FastAPI**: Lightweight backend server for API proxying.
 - **Pandas**: Data manipulation and analysis.
+- **Google Gemini API**: AI-powered insights and summaries.
 - **Matplotlib/Seaborn**: Static image generation for charts.
 
 ## Getting Started
@@ -46,12 +48,18 @@ A powerful full-stack application for analyzing and summarizing CSV datasets. Th
    npm install
    ```
 
-3. **Backend Setup** (Optional, if running local Python analysis)
+3. **Backend Setup** (Required for AI Summaries)
    ```bash
    cd ../backend
    python -m venv .venv
    source .venv/bin/activate  # On Windows: .venv\Scripts\activate
    pip install -r requirements.txt
+   
+   # Create a .env file in the root directory
+   echo "GEMINI_API_KEY=your_api_key_here" > ../.env
+   
+   # Start the backend server
+   uvicorn api:app --reload --port 8000
    ```
 
 ## Usage

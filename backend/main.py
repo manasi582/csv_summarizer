@@ -17,7 +17,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-from anthropic import Anthropic
+import google.generativeai as genai
 
 # Configure logging
 logging.basicConfig(
@@ -458,15 +458,16 @@ class SummaryGenerator:
         Initialize summary generator.
         
         Args:
-            api_key: Anthropic API key (or use ANTHROPIC_API_KEY env var)
+            api_key: Gemini API key (or use GEMINI_API_KEY env var)
         """
-        api_key = api_key or os.getenv('OPENAI_API_KEY')
+        api_key = api_key or os.getenv('GEMINI_API_KEY')
         
         if not api_key:
             logger.warning("No API key provided. Summary generation will be skipped.")
-            self.client = None
+            self.model = None
         else:
-            self.client = Anthropic(api_key=api_key)
+            genai.configure(api_key=api_key)
+            self.model = genai.GenerativeModel('gemini-1.5-flash')
     
     def generate_summary(self, profile: DatasetProfile) -> str:
         """
@@ -478,19 +479,14 @@ class SummaryGenerator:
         Returns:
             Natural language summary string
         """
-        if self.client is None:
+        if self.model is None:
             return self._generate_basic_summary(profile)
         
         prompt = self._build_prompt(profile)
         
         try:
-            message = self.client.messages.create(
-                model="claude-sonnet-4-20250514",
-                max_tokens=1000,
-                messages=[{"role": "user", "content": prompt}]
-            )
-            
-            summary = message.content[0].text
+            response = self.model.generate_content(prompt)
+            summary = response.text
             logger.info("Generated AI summary successfully")
             return summary
             
@@ -725,7 +721,7 @@ def main(csv_file: str, api_key: Optional[str] = None):
     
     Args:
         csv_file: Path to CSV file
-        api_key: Optional Anthropic API key
+        api_key: Optional Gemini API key
     """
     print("=" * 80)
     print("CSV ANALYZER")
@@ -797,7 +793,7 @@ if __name__ == "__main__":
     
     parser = argparse.ArgumentParser(description="CSV Analyzer - Professional Data Profiling")
     parser.add_argument("csv_file", help="Path to CSV file")
-    parser.add_argument("--api-key", help="Anthropic API key (or set ANTHROPIC_API_KEY env var)")
+    parser.add_argument("--api-key", help="Gemini API key (or set GEMINI_API_KEY env var)")
     
     args = parser.parse_args()
     main(args.csv_file, args.api_key)

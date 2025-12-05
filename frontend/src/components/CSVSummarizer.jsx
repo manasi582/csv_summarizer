@@ -88,39 +88,23 @@ const CSVSummarizer = () => {
     };
 
     const generateLLMSummary = async (analysisData) => {
-        const prompt = `You are a data analyst. Provide a concise summary (200-300 words) of this dataset analysis.
-
-Dataset Overview:
-- Rows: ${analysisData.numRows}
-- Columns: ${analysisData.numCols}
-- Overall missing data: ${analysisData.totalNullPercent}%
-
-Column Details:
-${analysisData.columnAnalysis.map(col => `
-- ${col.name} (${col.type}): ${col.nullPercent}% missing, ${col.uniqueCount} unique values
-  ${col.type === 'numeric' ? `Stats: Mean=${col.stats.mean}, Std=${col.stats.std}, Range=[${col.stats.min}, ${col.stats.max}]` : `Sample values: ${col.sampleValues.join(', ')}`}
-`).join('')}
-
-${analysisData.correlations.length > 0 ? `Notable Correlations:\n${analysisData.correlations.map(c => `- ${c.col1} ↔ ${c.col2}: ${c.correlation}`).join('\n')}` : ''}
-
-Provide insights about data quality, patterns, and potential areas of interest for analysis.`;
-
         try {
-            const response = await fetch('https://api.anthropic.com/v1/messages', {
+            const response = await fetch('http://localhost:8000/summarize', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    model: 'claude-sonnet-4-20250514',
-                    max_tokens: 1000,
-                    messages: [{ role: 'user', content: prompt }]
-                })
+                body: JSON.stringify(analysisData)
             });
 
+            if (!response.ok) {
+                throw new Error('Backend summary generation failed');
+            }
+
             const data = await response.json();
-            return data.content.find(c => c.type === 'text')?.text || 'Summary generation failed';
+            return data.summary;
         } catch (err) {
+            console.error("Failed to fetch summary from backend:", err);
             return `Analysis complete! The dataset contains ${analysisData.numRows} rows and ${analysisData.numCols} columns. ${analysisData.columnAnalysis.filter(c => c.type === 'numeric').length} columns are numeric, while ${analysisData.columnAnalysis.filter(c => c.type === 'categorical').length} are categorical. Missing data accounts for ${analysisData.totalNullPercent}% of total entries. ${analysisData.correlations.length > 0 ? `Notable correlations found between ${analysisData.correlations[0].col1} and ${analysisData.correlations[0].col2} (${analysisData.correlations[0].correlation}).` : 'No strong correlations detected between numeric columns.'}`;
         }
     };
@@ -443,8 +427,8 @@ End of Report
                                                         <td className="p-3 sm:p-4 font-medium text-slate-200">{col.name}</td>
                                                         <td className="p-3 sm:p-4">
                                                             <span className={`px-2 py-1 rounded text-xs font-medium ${col.type === 'numeric'
-                                                                    ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20'
-                                                                    : 'bg-blue-500/10 text-blue-400 border border-blue-500/20'
+                                                                ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20'
+                                                                : 'bg-blue-500/10 text-blue-400 border border-blue-500/20'
                                                                 }`}>
                                                                 {col.type}
                                                             </span>
@@ -580,8 +564,8 @@ End of Report
                                                     <div className="flex items-center justify-between mb-2">
                                                         <span className="text-xs font-medium text-slate-400">Pearson's r</span>
                                                         <span className={`text-sm font-bold ${parseFloat(corr.correlation) > 0
-                                                                ? 'text-emerald-400'
-                                                                : 'text-red-400'
+                                                            ? 'text-emerald-400'
+                                                            : 'text-red-400'
                                                             }`}>
                                                             {corr.correlation}
                                                         </span>
