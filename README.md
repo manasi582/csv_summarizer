@@ -17,7 +17,7 @@ A powerful full-stack application for analyzing and summarizing CSV datasets. Th
 - **Vite**: Fast build tool and development server.
 - **Tailwind CSS**: Utility-first CSS framework for styling.
 - **Recharts**: Composable charting library for React.
-- **Lucide React**: Beautiful & consistent icons.
+- **Lucide React**: Consistent icons.
 - **PapaParse**: Powerful CSV parser.
 
 ### Backend
