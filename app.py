@@ -2,7 +2,19 @@
 import streamlit as st
 import os
 import tempfile
+from dotenv import load_dotenv
 from backend.main import DataAnalyzer, SummaryGenerator, Visualizer
+
+# Load environment variables
+load_dotenv()
+
+api_key = os.getenv("GEMINI_API_KEY")
+if not api_key:
+    st.error("❌ GEMINI_API_KEY not found in environment variables. Please check your .env file.")
+elif "your_api_key" in api_key:
+    st.error("❌ It looks like you are using the placeholder API key. Please open .env and paste your actual Google Gemini key.")
+elif not api_key.startswith("AIza"):
+    st.warning("⚠️ Your API key doesn't start with 'AIza'. It might be invalid. Please check for copy-paste errors.")
 
 # Page Config
 st.set_page_config(
@@ -90,7 +102,7 @@ def main():
                 st.subheader("Numeric Distributions")
                 dist_path = visualizer.plot_distributions(analyzer.df, filename="dist_temp.png")
                 if dist_path and os.path.exists(dist_path):
-                    st.image(dist_path, use_column_width=True)
+                    st.image(dist_path, use_container_width=True)
                 else:
                     st.info("No numeric columns to plot.")
 
@@ -98,7 +110,7 @@ def main():
                 st.subheader("Correlation Matrix")
                 corr_path = visualizer.plot_correlation_matrix(analyzer.df, filename="corr_temp.png")
                 if corr_path and os.path.exists(corr_path):
-                    st.image(corr_path, use_column_width=True)
+                    st.image(corr_path, use_container_width=True)
                 else:
                     st.info("Not enough numeric columns for correlations.")
 
@@ -106,7 +118,7 @@ def main():
                 st.subheader("Missing Value Heatmap")
                 miss_path = visualizer.plot_missing_values(analyzer.df, filename="miss_temp.png")
                 if miss_path and os.path.exists(miss_path):
-                    st.image(miss_path, use_column_width=True)
+                    st.image(miss_path, use_container_width=True)
                 else:
                     st.success("No missing values detected!")
 

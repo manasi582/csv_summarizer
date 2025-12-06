@@ -60,7 +60,17 @@ A powerful full-stack application for analyzing and summarizing CSV datasets. Th
 ## Contributing
 Feel free to submit a PR or open an issue for suggestions or bugs.
 
-## License
+## Screenshots
 
-This project is licensed under the MIT License.
+### AI Summary
+![AI Summary](ai_summary.jpg)
+
+### Data Preview
+![Data Preview](data_preview.jpg)
+
+### Distributions
+![Distributions](distributions.jpg)
+
+### Correlation Matrix
+![Correlation Matrix](correlation_matrix.jpg)
 
